@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Custom Scrollbar Styling (Webkit) */
+webkit-scrollbar {
+    width: 8px; /* Lebar scrollbar */
+    height: 8px; /* Tinggi scrollbar untuk horizontal */
+}
+webkit-scrollbar-track {
+    background: #1e293b; /* Warna track, sesuaikan dengan bg-slate-800 atau lebih gelap */
+}
+webkit-scrollbar-thumb {
+    background: #475569; /* Warna thumb (bagian yang digeser), sesuaikan dengan bg-slate-600 */
+    border-radius: 4px;
+}
+webkit-scrollbar-thumb:hover {
+    background: #64748b; /* Warna thumb saat hover, sesuaikan dengan bg-slate-500 */
+}
