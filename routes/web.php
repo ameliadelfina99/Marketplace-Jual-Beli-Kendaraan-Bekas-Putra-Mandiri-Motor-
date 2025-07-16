@@ -49,7 +49,7 @@ Route::post('register', [RegisterController::class, 'register']);
 */
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-    
+    Route::get('/sales-data', [DashboardController::class, 'getSalesData'])->name('sales.data');
     // SEMUA RUTE PENGELOLAAN KENDARAAN PINDAH KE SINI
     Route::get('/vehicles/create', [VehicleController::class, 'create'])->name('vehicles.create');
     Route::post('/vehicles', [VehicleController::class, 'store'])->name('vehicles.store');
@@ -77,6 +77,11 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::delete('/favorites', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
     Route::get('/favorites/items', [FavoriteController::class, 'getFavoriteItemsForPanel'])->name('favorites.items');
     
+    // RUTE BARU UNTUK MENAMPILKAN HALAMAN CHECKOUT
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+
     // RUTE BARU UNTUK CHECKOUT
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 

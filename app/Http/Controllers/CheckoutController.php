@@ -14,6 +14,25 @@ class CheckoutController extends Controller
         $this->middleware('auth');
     }
 
+    /**
+     * Menampilkan halaman checkout dengan ringkasan item dari keranjang.
+     */
+    public function index()
+    {
+        $cartItems = Cart::where('user_id', Auth::id())->with('vehicle')->get();
+
+        // Jika keranjang kosong, jangan biarkan masuk ke checkout
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('vehicles.index')->with('info', 'Keranjang Anda kosong. Silakan pilih kendaraan terlebih dahulu.');
+        }
+
+        $totalAmount = $cartItems->sum(function ($item) {
+            return $item->vehicle->price;
+        });
+
+        return view('checkout.index', compact('cartItems', 'totalAmount'));
+    }
+
     // Method untuk memproses pesanan dan membuat transaksi
     public function store(Request $request)
     {
